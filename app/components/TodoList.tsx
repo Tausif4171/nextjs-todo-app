@@ -1,6 +1,10 @@
+import getTodo from '@/api'
+import { ITodo } from '@/types/tasks';
 import React from 'react'
 
-function TodoList() {
+async function TodoList() {
+    const data = await getTodo();
+    console.log(data)
     return (
         <div className=" w-[600px]">
             <table className="table">
@@ -11,10 +15,16 @@ function TodoList() {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <th>1</th>
-                        <td>Blue</td>
-                    </tr>
+                    {data.map((item: ITodo) => {
+                        return (
+                            <>
+                                <tr key={item.id}>
+                                    <th>{item.name}</th>
+                                    <td>Blue</td>
+                                </tr>
+                            </>
+                        )
+                    })}
                 </tbody>
             </table>
         </div>
