@@ -1,6 +1,7 @@
 import getTodo from '@/api'
 import { ITodo } from '@/types/tasks';
 import React from 'react'
+import TodoItem from './TodoItem';
 
 async function TodoList() {
     const data = await getTodo();
@@ -18,10 +19,7 @@ async function TodoList() {
                     {data.map((item: ITodo) => {
                         return (
                             <>
-                                <tr key={item.id}>
-                                    <th>{item.name}</th>
-                                    <td>Blue</td>
-                                </tr>
+                                <TodoItem item={item} />
                             </>
                         )
                     })}
