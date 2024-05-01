@@ -4,6 +4,7 @@ import React, { FormEventHandler, useState } from 'react'
 import { CiCirclePlus } from "react-icons/ci";
 import Modal from './Modal';
 import { addTodo } from '@/api';
+import { v4 as uuidv4 } from 'uuid';
 
 
 function AddTask() {
@@ -11,11 +12,11 @@ function AddTask() {
     const [todoValue, setTodoValue] = useState<string>('');
 
     const handleAddTodo: React.FormEventHandler<HTMLFormElement> = async (e) => {
+        e.preventDefault();
         const res = await addTodo({
-            id: 3,
+            id: uuidv4(),
             name: todoValue
         })
-        e.preventDefault();
         console.log(todoValue)
         setShowModal(false)
     }

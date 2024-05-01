@@ -1,4 +1,4 @@
 export type ITodo = {
-    id: number;
+    id: string;
     name: string
 }
