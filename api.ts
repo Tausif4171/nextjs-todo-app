@@ -20,3 +20,16 @@ export const addTodo = async (todo: ITodo) => {
     const data = await res.json();
     return data;
 }
+
+export const updateTodo = async (todo: ITodo) => {
+    const res = await fetch(`${apiUrl}/tasks/${todo.id}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(todo)
+    })
+    const updateTodo = await res.json();
+    return updateTodo;
+}
+
