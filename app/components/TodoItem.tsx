@@ -7,7 +7,7 @@ import { FiEdit } from "react-icons/fi";
 import { MdDeleteOutline } from "react-icons/md";
 import Modal from './Modal';
 import { useRouter } from 'next/navigation';
-import { updateTodo } from '@/api';
+import { deleteTodo, updateTodo } from '@/api';
 
 
 function TodoItem({ item }: { item: ITodo }) {
@@ -26,6 +26,13 @@ function TodoItem({ item }: { item: ITodo }) {
         // setEditTodoValue('')
         setShowEditModal(false)
     }
+
+    const handleDeleteTodo = async (e: React.FormEvent<HTMLFormElement>, id: string) => {
+        e.preventDefault();
+        await deleteTodo(id);
+        setShowDeleteModal(false);
+        router.refresh();
+    };
     return (
         <>  <tr key={item.id}>
             <td className='w-full'>{item.name}</td>
@@ -44,7 +51,17 @@ function TodoItem({ item }: { item: ITodo }) {
                     </form>
 
                 </Modal>
-                <MdDeleteOutline className='w-6 h-6 cursor-pointer' />
+                <MdDeleteOutline onClick={() => setShowDeleteModal(true)} className='w-6 h-6 cursor-pointer' />
+                <Modal showModal={showDeleteModal} setShowModal={setShowDeleteModal}>
+                    <form onSubmit={(e) => handleDeleteTodo(e, item.id)}>
+                        <div className='mt-4'>
+                            <h1 className=' text-center'>Are you sure you want to delete {item.name}?</h1>
+                            <div className='w-full flex justify-end mt-2'>
+                                <button className="btn btn-primary">Delete</button>
+                            </div>
+                        </div>
+                    </form>
+                </Modal>
             </td>
         </tr></>
     )

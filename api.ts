@@ -33,3 +33,11 @@ export const updateTodo = async (todo: ITodo) => {
     return updateTodo;
 }
 
+export const deleteTodo = async (id: string) => {
+    await fetch(`${apiUrl}/tasks/${id}`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+    })
+}
