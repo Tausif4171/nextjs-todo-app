@@ -1,6 +1,6 @@
-import { Dispatch, SetStateAction } from "react";
 
 export type ModalProps = {
     showModal: boolean,
-    setShowModal: Dispatch<SetStateAction<boolean>>,
+    setShowModal: (showModal: boolean) => boolean | void,
+    children: React.ReactNode,
 }
