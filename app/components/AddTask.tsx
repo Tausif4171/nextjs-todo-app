@@ -5,9 +5,11 @@ import { CiCirclePlus } from "react-icons/ci";
 import Modal from './Modal';
 import { addTodo } from '@/api';
 import { v4 as uuidv4 } from 'uuid';
+import { useRouter } from 'next/navigation';
 
 
 function AddTask() {
+    const router = useRouter()
     const [showModal, setShowModal] = useState<boolean>(false);
     const [todoValue, setTodoValue] = useState<string>('');
 
@@ -17,7 +19,8 @@ function AddTask() {
             id: uuidv4(),
             name: todoValue
         })
-        console.log(todoValue)
+        router.refresh()
+        setTodoValue('')
         setShowModal(false)
     }
 
