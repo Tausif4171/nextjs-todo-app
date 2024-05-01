@@ -1,4 +1,4 @@
-import getTodo from '@/api'
+import { getTodo } from '@/api'
 import { ITodo } from '@/types/tasks';
 import React from 'react'
 import TodoItem from './TodoItem';

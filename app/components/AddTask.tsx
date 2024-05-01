@@ -3,17 +3,23 @@
 import React, { FormEventHandler, useState } from 'react'
 import { CiCirclePlus } from "react-icons/ci";
 import Modal from './Modal';
+import { addTodo } from '@/api';
 
 
 function AddTask() {
     const [showModal, setShowModal] = useState<boolean>(false);
     const [todoValue, setTodoValue] = useState<string>('');
 
-    const handleAddTodo: React.FormEventHandler<HTMLFormElement> = (e) => {
+    const handleAddTodo: React.FormEventHandler<HTMLFormElement> = async (e) => {
+        const res = await addTodo({
+            id: 3,
+            name: todoValue
+        })
         e.preventDefault();
         console.log(todoValue)
         setShowModal(false)
     }
+
     return (
         <div className='my-[20px]'>
             <button onClick={() => setShowModal(true)} className="btn btn-info w-[300px]">Add new Task <CiCirclePlus size={20} /></button>
